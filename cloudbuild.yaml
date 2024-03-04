@@ -16,4 +16,4 @@ steps:
  - name: 'gcr.io/cloud-builders/gcloud'
    args: ['beta', 'run', 'deploy', '--image', 'gcr.io/$PROJECT_ID/node-web-app:latest', '--region', 'global', '--platform', 'managed', '--allow-unauthenticated']
 images:
- - 'gcr.io/$PROJECT_ID/node-web-app'
+ - 'gcr.io/$PROJECT_ID/node-web-app:latest'
