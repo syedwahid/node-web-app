@@ -40,4 +40,4 @@ jobs:
         key: ${{ secrets.GCP_SSH_PRIVATE_KEY }}
         script: |
           docker pull gcr.io/dazzling-bruin-443616-h2/gha-demo:latest
-          docker run -d --name gha-demo -p 80:80 gcr.io/dazzling-bruin-443616-h2/gha-demo:latest
+          docker run -d --name gha-demo -p 8888:8888 gcr.io/dazzling-bruin-443616-h2/gha-demo:latest
