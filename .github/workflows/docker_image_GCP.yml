@@ -1,4 +1,4 @@
-name: Build, Push, and Deploy Docker Image to GCP VM
+name: Build,Push,Deploy to GCP VM
 
 on:
   push:
