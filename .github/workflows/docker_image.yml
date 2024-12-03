@@ -3,6 +3,7 @@ name: Build and push Docker image to dockerhub
 on:
   push:
     branches: [ "main" ]
+  workflow_dispatch:
     
 jobs:
 
@@ -28,4 +29,3 @@ jobs:
        context: .
        push: true
        tags: syedwahid/githubaction:latest
-
