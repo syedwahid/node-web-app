@@ -1,5 +1,5 @@
 steps:
-  # Pull existing image
+  # Pull existing image (for caching)
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
     args:
@@ -15,18 +15,19 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ["push", "gcr.io/$PROJECT_ID/node-web-app"]
   
-  # Deploy to Cloud Run (serverless)
+  # Deploy to Cloud Run
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['run', 'deploy', 'node-web-app', 
            '--image', 'gcr.io/$PROJECT_ID/node-web-app:latest', 
            '--region', 'us-central1', 
-           '--platform', 'managed', 
            '--allow-unauthenticated', 
            '--port', '8888']
 
-# Fix the logging error - add this section
+# Use the Cloud Build service account (not Compute Engine)
+serviceAccount: 'projects/$PROJECT_ID/serviceAccounts/$PROJECT_NUMBER-compute@developer.gserviceaccount.com'
+
 options:
-  logging: NONE
+  logging: CLOUD_LOGGING_ONLY
 
 images:
   - 'gcr.io/$PROJECT_ID/node-web-app:latest'
