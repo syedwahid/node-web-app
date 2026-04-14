@@ -1,23 +1,22 @@
 steps:
   # Build Docker image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/node-web-app', '.']
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/node-web-app-repo/node-web-app', '.']
   
-  # Push to Container Registry
+  # Push to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ["push", "gcr.io/$PROJECT_ID/node-web-app"]
+    args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/node-web-app-repo/node-web-app']
   
-  # Deploy to Cloud Run
+  # Deploy to Cloud Run from Artifact Registry
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['run', 'deploy', 'node-web-app', 
-           '--image', 'gcr.io/$PROJECT_ID/node-web-app:latest', 
+           '--image', 'us-central1-docker.pkg.dev/$PROJECT_ID/node-web-app-repo/node-web-app:latest', 
            '--region', 'us-central1', 
            '--allow-unauthenticated', 
            '--port', '8888']
 
-# This fixes the logging error
 options:
   logging: CLOUD_LOGGING_ONLY
 
 images:
-  - 'gcr.io/$PROJECT_ID/node-web-app:latest'
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/node-web-app-repo/node-web-app:latest'
