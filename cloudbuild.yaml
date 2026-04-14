@@ -7,7 +7,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/node-web-app-repo/node-web-app']
   
-  # Deploy to Cloud Run from Artifact Registry
+  # Deploy to Cloud Run
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['run', 'deploy', 'node-web-app', 
            '--image', 'us-central1-docker.pkg.dev/$PROJECT_ID/node-web-app-repo/node-web-app:latest', 
