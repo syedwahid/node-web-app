@@ -26,7 +26,7 @@ steps:
 
 # Fix the logging error - add this section
 options:
-  logging: CLOUD_LOGGING_ONLY
+  logging: NONE
 
 images:
   - 'gcr.io/$PROJECT_ID/node-web-app:latest'
