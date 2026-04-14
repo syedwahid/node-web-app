@@ -15,6 +15,9 @@ steps:
            '--allow-unauthenticated', 
            '--port', '8888']
 
+# Use Cloud Build service account (NOT Compute Engine)
+serviceAccount: 'projects/$PROJECT_ID/serviceAccounts/219068007957@cloudbuild.gserviceaccount.com'
+
 options:
   logging: CLOUD_LOGGING_ONLY
 
