@@ -1,13 +1,10 @@
 steps:
-  # Build Docker image
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/node-web-app-repo/node-web-app', '.']
   
-  # Push to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/node-web-app-repo/node-web-app']
   
-  # Deploy to Cloud Run
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['run', 'deploy', 'node-web-app', 
            '--image', 'us-central1-docker.pkg.dev/$PROJECT_ID/node-web-app-repo/node-web-app:latest', 
@@ -15,8 +12,8 @@ steps:
            '--allow-unauthenticated', 
            '--port', '8888']
 
-# Use Cloud Build service account (NOT Compute Engine)
-serviceAccount: 'projects/$PROJECT_ID/serviceAccounts/219068007957@cloudbuild.gserviceaccount.com'
+# Use THIS exact format (no $PROJECT_ID, use actual project ID)
+serviceAccount: 'projects/nodejs-hello-world-493321/serviceAccounts/219068007957@cloudbuild.gserviceaccount.com'
 
 options:
   logging: CLOUD_LOGGING_ONLY
